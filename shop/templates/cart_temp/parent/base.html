@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+{% load static%}
+<html lang="en">
+<head>
+    {%block head%}{%endblock%}
+    <meta charset="UTF-8">
+    <title>{%block title%}{%endblock%}</title>
+</head>
+<body>
+{% include 'header/head.html'%}
+{% block content%}{%endblock%}
+{% include 'foter/foter.html'%}
+</body>
+</html>

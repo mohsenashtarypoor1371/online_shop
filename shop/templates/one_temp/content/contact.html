@@ -1,0 +1,21 @@
+{% extends 'one_temp/parent/base.html'%}
+{% block head%}{%endblock%}
+{% block title%}{%endblock%}
+{%block content%}
+<div class="col-md-6">
+<form method="POST">
+    {%csrf_token%}
+    <label>f_name</label>
+    <input name="f_name" type="text" class="form-control">
+       <label>l_name</label>
+     <input name="l_name" type="text" class="form-control">
+       <label>email</label>
+     <input name="email" type="email" class="form-control">
+       <label class="form-label">subject</label>
+     <input name="subject" type="text" class="form-control">
+       <label>message</label>
+     <input name="message" type="text" class="form-control">
+    <button type="submit" class="btn btn-primary mb-2">send</button>
+</form>
+    </div>
+{%endblock%}

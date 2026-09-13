@@ -1,0 +1,29 @@
+{%extends 'one_temp/parent/base.html'%}
+{%block head%}{%endblock%}
+{%block title%}{%endblock%}
+{%block content%}
+<div class="col-md-2">
+    {%if messages%}
+    {% for i in messages%}
+    {{i}}
+    {%endfor%}
+    {%endif%}<br>
+    {% if user.is_authenticated%}
+    {%for j in order_item2%}
+    order:{{j.order.name}}<br>
+    product:{{j.product}}<br>
+    quantity:{{j.quantity}}<br>
+    price:{{j.price}}<br>
+    status:{{j.order.status}}<br>
+    {%endfor%}
+    {%else%}
+    {% for i in order_item%}
+    order:{{i.order.name}}<br>
+    product:{{i.product}}<br>
+    quantity:{{i.quantity}}<br>
+    price:{{i.price}}<br>
+    status:{{i.order.status}}<br>
+    {%endfor%}
+    {%endif%}
+</div>
+{%endblock%}

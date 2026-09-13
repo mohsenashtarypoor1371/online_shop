@@ -1,0 +1,29 @@
+{% extends 'one_temp/parent/base.html'%}
+{% block head%}{%endblock%}
+{% block title%}{%endblock%}
+{%block content%}
+    {%if messages%}
+    {%for i in messages%}
+    {{i}}
+    {%endfor%}
+    {%endif%}
+<form method="POST" class="col-md-6">
+    {%csrf_token%}
+    <label class="form-label">first_name</label>
+    <input type="text" name="first_name" class="form-control">
+    {{form.first_name.errors}}
+    <label class="form-label">last_name</label>
+    <input type="text" name="last_name" class="form-control">
+    {{form.last_name.errors}}
+    <label class="form-label">username</label>
+    <input type="text" name="username" class="form-control">
+      {{form.username.errors}}
+    <label class="form-label">password</label>
+    <input type="password" name="password" class="form-control" maxlength="15">
+      {{form.password.errors}}
+    <label class="form-label">email</label>
+    <input type="email" name="email" class="form-control">
+      {{form.email.errors}}
+    <button type="submit" class="btn btn-info">signup</button>
+</form>
+{%endblock%}

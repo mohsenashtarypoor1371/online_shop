@@ -1,0 +1,32 @@
+{%extends 'one_temp/parent/base.html'%}
+{%block head%}{%endblock%}
+{%block title%}{%endblock%}
+{%block content%}
+<div class="col-md-2">
+    {%if user.is_authenticated%}
+    {%for j in order_item2%}
+    user:{{j.order.name}}<br>
+    product:{{j.product}}<br>
+    quantity:{{j.quantity}}<br>
+    price:{{j.price}}<br>
+    status:{{j.order.status}}<br><br>
+    {%endfor%}
+    {%else%}
+    {% for i in order_item%}
+    order:{{i.order.name}}<br>
+    product:{{i.product}}<br>
+    quantity:{{i.quantity}}<br>
+    price:{{i.price}}<br>
+    status:{{i.order.status}}<br>
+    {%endfor%}
+    {%endif%}
+</div>
+<div class="d-flex gap-2">
+<form method="GET" action="{% url 'cart:payment_successful'%}">
+    <button type="submit" class="btn btn-info btn-sm">payment_successful</button>
+</form>
+<form method="GET" action="{% url 'cart:payment_failed'%}">
+    <button type="submit" class="btn btn-info btn-sm">payment_failed</button>
+</form>
+</div>
+{%endblock%}

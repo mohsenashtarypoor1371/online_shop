@@ -1,0 +1,34 @@
+{% extends 'one_temp/parent/base.html'%}
+{% block head%}{%endblock%}
+{% block title%}{%endblock%}
+{%block content%}
+{%if messages%}
+{% for i in messages%}
+{{i}}
+{%endfor%}
+{%endif%}<br>
+{%for i in item%}
+name:{{i.product.name_product}}<br>
+quantity:{{i.quantity}}<br>
+price:{{i.product.price}}<br>
+<img src="{{i.product.image.url}}" width="180"><br>
+<form method="POST" name="remove" action="{% url 'cart:remove' i.product.pk%}">
+    {%csrf_token%}
+<button type="submit" name="remove" class="btn btn-primary btn-sm">remove</button><br><br>
+</form>
+<div class="col-md-6">
+<form method="POST" action="{% url 'cart:update' i.product.pk%}">
+    {%csrf_token%}
+    <input type="number" value="0" min="0" max="100" name="query">
+    <button type="submit" class="btn btn-primary btn-sm">update</button>
+</form>
+</div>
+{%endfor%}
+total_price:{{total}}<br>
+<form method="GET" action="{%url 'one:shop_show'%}">
+<button type="submit" class="btn btn-danger btn-sm">back</button>
+</form>
+<form method="GET" action="{% url 'cart:order'%}">
+    <button type="submit" class="btn btn-info btn-sm">checkout</button>
+</form>
+{%endblock%}

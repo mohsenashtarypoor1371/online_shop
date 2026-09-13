@@ -1,0 +1,14 @@
+{% extends 'one_temp/parent/base.html'%}
+{% block head%}{%endblock%}
+{% block title%}{%endblock%}
+{%block content%}
+<div class="col-md-6">
+{%for i in list %}
+name:{{i.name_product}}<br>
+<img src="{{i.image.url}}" width="150px"><br>
+    <form method="GET" class="col-md-6" action="{%url 'cart:delete' i.pk%}">
+    <button type="submit" class="btn btn-danger btn-sm">remove</button><br><br>
+    </form>
+{%endfor%}
+</div>
+{%endblock%}

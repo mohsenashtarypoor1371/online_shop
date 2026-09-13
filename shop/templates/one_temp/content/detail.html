@@ -1,0 +1,49 @@
+{% extends 'one_temp/parent/base.html'%}
+{% block head%}{%endblock%}
+{% block title%}{%endblock%}
+{%block content%}
+{%if messages%}
+{%for i in messages%}
+{{i}}
+{%endfor%}
+{%endif%}
+name: {{product.name_product}}<br>
+price: {{product.price}}<br>
+stock: {{product.stock}}<br>
+manufacture: {{product.manufacture_country}}<br>
+<img src="{{product.image.url}}" width="200"><br>
+<a href="{%url 'cart:add_cart' product.id%}">shopping cart</a>
+<form method="GET" action="{% url 'cart:add_wish' product.pk%}">
+    <button type="submit" class="btn btn-danger btn-sm">add-favorite</button>
+</form>
+<form  method= "GET" action="{% url 'one:comment' product.slug %}" class="mt-2">
+     {%csrf_token%}
+   <button type="submit" class="btn btn-info btn-sm">comment</button>
+</form>
+{% for com in comment%}
+<div class="card mt-1" style="max-width:500px">
+    {% if com.user%}
+    <h6 class="card-title">comment for {{com.user}}</h6>
+    {%else%}
+        guest
+    {%endif%}
+    <div class="card-body">
+        <p class="card-text">{{com.text}}</p>
+    </div>
+    <h6 class="card-title">rating</h6>
+    <div class="card-text">
+        {{com.rating}}
+    </div>
+</div>
+<div class="d-flex gap-2">
+<form method="POST" action="{% url 'one:delete_comment' com.id %}">
+    {%csrf_token%}
+    <button type="submit" class="btn btn-danger btn-sm">delete</button>
+</form>
+<form method="GET" action="{% url 'one:edit_comment' com.id%}" >
+    {%csrf_token%}
+    <button type="submit" class="btn btn-danger btn-sm ">edit</button>
+</form>
+</div>
+{%endfor%}
+{%endblock%}

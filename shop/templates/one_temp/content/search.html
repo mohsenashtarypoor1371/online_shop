@@ -1,0 +1,14 @@
+{% extends 'one_temp/parent/base.html'%}
+{% block head%}{%endblock%}
+{% block title%}{%endblock%}
+{%block content%}
+{%if search%}
+{% for i in search%}
+<div>
+{{i}}
+</div>
+{%endfor%}
+{%else%}
+<meta http-equiv="refresh" content="2;{% url 'one:shop_show'%}">not found
+{%endif%}
+{%endblock%}

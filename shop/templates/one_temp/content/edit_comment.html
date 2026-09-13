@@ -1,0 +1,17 @@
+{% extends 'one_temp/parent/base.html'%}
+{% block head%}{%endblock%}
+{% block title%}{%endblock%}
+{%block content%}
+<div class="col-md-6">
+<form method="POST">
+    {%csrf_token%}
+    <label class="form-label">text</label>
+    <input type="text" name="text" class="form-control" style="height:100px;" value="{{form.text.value}}">
+    {{form.text.errors}}
+    <label class="form-label">rating</label>
+    <input type="text" name="rating" class="form-control" maxlength="1" style="width:50px;" value="{{form.rating.value}}">
+    {{form.errors.rating}}
+    <button type="submit" class="btn btn-info btn-sm">save</button>
+</form>
+</div>
+{%endblock%}

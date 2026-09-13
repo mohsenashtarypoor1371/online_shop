@@ -1,0 +1,41 @@
+{% extends 'one_temp/parent/base.html'%}
+{% block head%}
+<div class="d-flex-item">
+<a href="{% url 'one:contact'%}">contact</a>
+<a href="{% url 'one:login'%}">login</a>
+<a href="{% url 'one:log_out'%}">logout</a>
+<a href="{% url 'one:sign_up'%}">signup</a>
+    <a href="{% url 'one:recruitment'%}">recruitment</a>
+    <div class="position-absolute top-0 end-0 m-3 d-flex gap-2">
+    <form method="GET" action="{% url 'cart:show_cart'%}">
+        <button type="submit" class="btn btn-danger btn-sm float-left">cart</button>
+    </form>
+        <form method="GET" action="{%url 'cart:show_wish'%}">
+            <button type="submit" class="btn btn-danger btn-sm">favorite</button>
+        </form>
+        <form method="GET" action="{% url 'cart:order_info'%}">
+            <button type="submit" class="btn btn-danger btn-sm">order_info</button>
+        </form>
+         </div>
+</div>
+{{request.user}}
+{%endblock%}
+{% block title%}{%endblock%}
+{%block content%}
+<div>
+<form method="GET" name="search" action="{% url 'one:search'%}" class="d-flex">
+    {%csrf_token%}
+    <input type="text" placeholder="search" name="q" class="form-control me-2">
+    <button type="submit" name="search" class="btn btn-info">search</button>
+</form>
+</div>
+<div>
+{%for i in page%}
+    category:{{i.category}}<br>
+    name_product: <a href="{% url 'one:detail' i.slug%}">{{i.name_product}}</a><br>
+    <img src="{{i.image.url}}" width="200"><br><br>
+    {%endfor%}
+</div>
+
+{% include 'one_temp/content/page.html'%}
+{%endblock%}

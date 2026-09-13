@@ -1,0 +1,26 @@
+{% extends 'one_temp/parent/base.html'%}
+{%block head%}{%endblock%}
+{%block title%}{%endblock%}
+{%block content%}
+<form method="POST" class="col-md-6" autocomplete="off">
+    {% csrf_token%}
+    <label class="form-label">f_name</label>
+    <input type="text" name="f_name" class="form-control">
+    <label class="form-label">l_name</label>
+    <input type="text" name="l_name" class="form-control">
+    <label class="form-label">email</label>
+    <input type="email" name="email" class="form-control">
+     <label class="form-label">address</label>
+    <input type="text" name="address" class="form-control">
+    <label class="form-label">phone</label>
+    {{form.phone.errors}}
+    <input type="text" name="phone" class="form-control" maxlength="11">
+     <label class="form-label">job_title</label>
+    <input type="text" name="job_title" class="form-control">
+    <label class="form-label">skill</label>
+    <input type="text" name="skill" class="form-control" maxlength="15">
+    <label class="form-label">work_history</label>
+    <input type="text" name="work_history" class="form-control" maxlength="15">
+    <button type="submit" class="btn btn-primary">send</button>
+</form>
+{%endblock%}

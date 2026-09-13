@@ -1,0 +1,66 @@
+{%extends 'one_temp/parent/base.html'%}
+{%block head%}{%endblock%}
+{%block title%}{%endblock%}
+{%block content%}
+{% if messages%}
+{% for message in messages%}
+{{message}}
+{%endfor%}
+{%endif%}
+<h1>order_info</h1>
+{% if user.is_authenticated%}
+user:{{user}}
+<div class="col-md-2">
+    <h5>info ordering</h5>
+    {%for i in orders%}
+    {% if forloop.first%}
+    name:{{i.name}}<br>
+    phone:{{i.phone}}<br>
+    address:{{i.address}}<br><br>
+    {%endif%}
+    {%endfor%}
+    <h5>specification product</h5>
+    {%for i in item%}
+    product:{{i.product}}<br>
+    quantity:{{i.quantity}}<br>
+    price:{{i.price}}<br>
+    status:{{i.order.status}}<br><br>
+    {%endfor%}
+    {%else%}
+    <div class="col-md-2">
+    {%for a in order1%}
+        {%if forloop.first%}
+          <h4>my order</h4>
+        name:{{a.name}}<br>
+        phone:{{a.phone}}<br>
+        address:{{a.address}}<br>
+        status:{{a.get_status_display}}<br>
+        {%endif%}
+        <h4>info ordering</h4>
+        {% for b in order_item%}
+        {% if b.order_id == a.id%}
+        product:{{b.product}}<br>
+        price:{{b.price}}<br>
+        quantity:{{b.quantity}}<br>
+        status_paid:{{b.order.status}}
+        {%endif%}
+        {%endfor%}<br>
+        {%endfor%}
+        {%endif%}
+    </div>
+    <h4>total product price:{{total}}</h4>
+<h5>total_number_of_purchased_item:{{total_number}}</h5>
+    </div>
+<div class="d-flex gap-3">
+    {% if p == 'pending' or p == 'processing'%}
+    <form method="GET" action="{% url 'cart:payment'%}">
+        <button type="submit" class="btn btn-info btn-sm me-3">payment</button>
+    </form>
+    {%elif p == 'paid'%}
+    <span>pay successful</span>
+    {%endif%}
+<form method="GET" action="{% url 'one:shop_show'%}">
+    <button type="submit" class="btn btn-info btn-sm">back</button>
+</form>
+</div>
+{%endblock%}
