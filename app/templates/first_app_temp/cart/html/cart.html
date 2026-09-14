@@ -1,0 +1,43 @@
+{% extends 'parent/base.html'%}
+{% block head%}
+{%endblock%}
+{% block title%}{%endblock%}
+{% block content%}
+<h2>welcome</h2>
+<div class=" justify-content-end">total_quantity_product :{{cart.total_quantity}}</div>
+<div class="justify-content-end">total_price_all : {{cart.total_price_all}}</div><br>
+    {% for p in cart%}
+    name:{{p.product}}<br>
+    quantity:{{p.quantity}}<br>
+    price:{{p.product.price}}<br>
+    <img src="{{p.product.image.url}}"><br>
+    <div class="d-flex gap-2">
+              {%if cart.total_price_all%}
+       <a href="{% url 'orders:order'%}" class="btn btn-info btn-sm">checkout</a>
+     {%else%}
+            <h1>empty</h1>
+            {%endif%}
+         <form method="POST" action="{% url 'cart:delete' p.product.pk %}">
+            {%csrf_token%}
+             <button type="submit" class="btn btn-info btn-sm">remove from the cart</button><br>
+         </form>
+    <form method="POST" action="{% url 'cart:update' p.product.pk %}" >
+        {%csrf_token%}
+        <input type="number" name="quantity" min="0">
+        <button type="submit" class="btn btn-info btn-sm" >update</button><br>
+    </form>
+         <form method="GET" action="{% url 'orders:my_order'%}">
+                {%csrf_token%}
+                <button type="submit" class="btn btn-info btn-sm">order cart</button>
+            </form>
+        </div>
+        <div>
+            {% if messages%}
+            {%for message in messages%}
+            <a href="{% url 'cart:show_cart' %}">{{message}}</a>
+            {% endfor%}
+            {%endif%}
+            {%endfor%}
+        </div><br>
+    <a href="{% url 'first_app:product'%}" class="btn btn-danger btn-sm ms-5">back</a>
+    {%endblock%}

@@ -1,0 +1,20 @@
+{% extends 'parent/base.html'%}
+{%block head%}
+{%block title%}{%endblock%}
+{%endblock%}
+{%block content%}
+<div>
+    <form method="POST" enctype="multipart/form-data">
+        {%csrf_token%}
+        <label class="form-label">name_user:</label>
+        <input name="name_user" type="text" class="form-control"><br>
+         <label class="form-label">email_user:</label>
+        <input name="email_user" type="email" class="form-control"><br>
+         <label class="form-label">picture_user:</label>
+        <input name="picture_user" type="file" class="form-control"><br>
+         <label class="form-label">comment_user:</label>
+        <textarea name="comment_user" class="form-control"></textarea><br>
+        <button type="submit" class="btn btn-info sm-2">save</button>
+    </form>
+</div>
+    {%endblock%}

@@ -1,0 +1,14 @@
+{% extends 'parent/base.html'%}
+{%block head%}{%endblock%}
+{%block title%}{%endblock%}
+{%block content%}
+{%for i in order1%}
+product:{{i.product}}<br>
+create:{{i.order.create}}<br><br>
+<form method="GET" action="{% url 'orders:detail_paid' i.order.pk%}">
+    {%csrf_token%}
+    <button type="submit" name="detail_paid" class="btn btn-info btn-sm">detail paid</button>
+</form>
+{%endfor%}
+total_price:<code>{{total}}</code>
+{%endblock%}

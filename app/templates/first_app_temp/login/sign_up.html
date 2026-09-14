@@ -1,0 +1,26 @@
+{% extends 'parent/base.html'%}
+{% block head%}{%endblock%}
+{% block title%}{%endblock%}
+{%block content%}
+<div>
+  {%if messages%}
+  {%for i in messages%}
+  <meta http-equiv="refresh" content="3;url={% url 'first_app:product' %}"><h2>{{i}}</h2>
+  {%endfor%}
+  {%else%}
+  <form method="POST">
+    {%csrf_token%}
+    <label class="form-label">username:</label>
+    {{form.username.errors}}
+    <input name="username" type="text" value="{{form.username.value|default:''}}" class="form-control"><br>
+    <label class="form-label">password</label>
+    {{form.password.errors}}
+    <input type="password" name="password" class="form-control"><br>
+    <label class="form-label">email</label>
+    {{form.email.errors}}
+    <input type="email" name="email" class="form-control"><br>
+    <button type="submit" class="btn btn-info btn-sm">save</button>
+  </form>
+</div>
+{%endif%}
+{%endblock%}

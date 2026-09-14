@@ -1,0 +1,16 @@
+{% extends 'parent/base.html'%}
+{% load static%}
+{% block head%}{%endblock%}
+{% block title%}online shop{%endblock%}
+.center{
+display:black;
+margin-left:auto;
+margin-right:auto;
+width:500px;
+height:500px;
+{% block content%}
+<div>
+    <h1><a href="{% url 'first_app:product'%}">welcome to online shop</a></h1>
+</div>
+<img src="{% static 'images/images.png'%}" width="500px" height="200px" alt="shop">
+{%endblock%}

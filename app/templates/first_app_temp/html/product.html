@@ -1,0 +1,26 @@
+{% extends 'parent/base.html'%}
+{%block head%}
+{%endblock%}
+{%block title%}
+{%endblock%}
+{% block content %}
+<div>
+    <form method="GET"  action="{% url 'first_app:search'%}" class="d-flex">
+        {%csrf_token%}
+        <input type="text" name="query" placeholder="search" class="form-control rounded-pill me-2">
+        <button type="submit" class="btn btn-primary rounded-pill">search</button>
+    </form>
+</div>
+{%if pending %}
+{%endif%}
+<div class="row">
+    {% for p in page %}
+        product_name:<a href="{%url 'first_app:detail' p.slug%}"
+                         class="col-md-4 mb-2"><code>{{p.product_name}}</code></a>
+    {% if p.image%}
+    <a href="{%url 'first_app:detail' p.slug%}"><img src="{{p.image.url}}" alt="{{p.product_name}}"></a>
+    {%endif%}
+    {%endfor%}
+</div>
+<div>{%include 'html/page.html' with page=page%}</div>
+{%endblock%}

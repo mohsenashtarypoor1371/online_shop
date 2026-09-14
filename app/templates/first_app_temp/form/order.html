@@ -1,0 +1,18 @@
+{% extends 'parent/base.html'%}
+{%block head%}{%endblock%}
+{%block title%}{%endblock%}
+{%block content%}
+<h1>welcome</h1>
+<form method="POST">
+    {{form.success}}
+    {%csrf_token%}
+    <label class="form-label">name:</label>
+   {{form.name}}<br>
+    <label class="form-label">phone:</label>
+     {{form.phone.errors}}
+    {{form.phone}}<br>
+    <label class="form-label">address:</label>
+    {{form.address}}<br>
+    <button type="submit" class="btn btn-primary btn-sm">save</button>
+</form>
+{% endblock%}
